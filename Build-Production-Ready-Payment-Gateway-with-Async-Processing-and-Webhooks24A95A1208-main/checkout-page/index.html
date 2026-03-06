@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Checkout</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 400px; margin: 50px auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input, select { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h2>Complete Payment</h2>
+    <form id="paymentForm">
+        <div class="form-group">
+            <label for="cardNumber">Card Number</label>
+            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+        </div>
+        <div class="form-group">
+            <label for="expiry">Expiry Date</label>
+            <input type="text" id="expiry" placeholder="MM/YY" required>
+        </div>
+        <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" placeholder="123" required>
+        </div>
+        <div class="form-group">
+            <label for="method">Payment Method</label>
+            <select id="method" required>
+                <option value="CARD">Credit/Debit Card</option>
+                <option value="UPI">UPI</option>
+            </select>
+        </div>
+        <button type="submit">Pay Now</button>
+    </form>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const isEmbedded = urlParams.get('embedded') === 'true';
+        const orderId = urlParams.get('orderId') || 'order_123';
+
+        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const paymentData = {
+                orderId: orderId,
+                amount: 100.00,
+                currency: 'USD',
+                method: formData.get('method')
+            };
+
+            try {
+                const response = await fetch('http://localhost:8000/api/v1/payments', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Api-Key': 'key_test_abc123',
+                        'X-Api-Secret': 'secret_test_xyz789'
+                    },
+                    body: JSON.stringify(paymentData)
+                });
+
+                const result = await response.json();
+
+                if (isEmbedded) {
+                    // Send message to parent
+                    window.parent.postMessage({
+                        type: response.ok ? 'payment_success' : 'payment_failed',
+                        data: result
+                    }, 'http://localhost:3000');
+                } else {
+                    alert('Payment initiated: ' + result.paymentId);
+                }
+            } catch (error) {
+                if (isEmbedded) {
+                    window.parent.postMessage({
+                        type: 'payment_failed',
+                        data: { error: error.message }
+                    }, 'http://localhost:3000');
+                } else {
+                    alert('Error: ' + error.message);
+                }
+            }
+        });
+
+        // Handle close for embedded
+        if (isEmbedded) {
+            window.addEventListener('message', function(event) {
+                if (event.origin === 'http://localhost:3000' && event.data.type === 'close_modal') {
+                    // Close or something
+                }
+            });
+        }
+    </script>
+</body>
+</html>

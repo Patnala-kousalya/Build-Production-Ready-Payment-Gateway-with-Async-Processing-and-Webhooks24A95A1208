@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/payment_gateway
+    username: gateway_user
+    password: gateway_pass
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  redis:
+    host: redis
+    port: 6379
+
+server:
+  port: 8000
+
+app:
+  role: ${APP_ROLE:API}
