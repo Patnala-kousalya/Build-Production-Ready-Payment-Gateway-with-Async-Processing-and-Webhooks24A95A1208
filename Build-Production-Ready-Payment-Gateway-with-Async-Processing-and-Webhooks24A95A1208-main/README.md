@@ -1,6 +1,6 @@
 # 💳 Payment Gateway with Async Processing and Webhooks
 
-A full-stack payment gateway simulation built with **Java Spring Boot**, **React**, **PostgreSQL**, **Redis**, and **Docker**. This system mimics a real-world payment infrastructure, featuring a secure REST API, async payment processing, webhook delivery, a merchant dashboard, and an embeddable JavaScript SDK for hosted checkout.
+A full-stack payment gateway simulation built with **Java Spring Boot**, **HTML/CSS/JavaScript**, **PostgreSQL**, **Redis**, and **Docker**. This system mimics a real-world payment infrastructure, featuring a secure REST API, async payment processing, webhook delivery, a merchant dashboard, and an embeddable JavaScript SDK for hosted checkout.
 
 ---
 
@@ -47,7 +47,7 @@ A full-stack payment gateway simulation built with **Java Spring Boot**, **React
 | **Backend** | Java 17, Spring Boot 3.x, Maven |
 | **Database** | PostgreSQL 15 |
 | **Cache/Queue** | Redis 7 |
-| **Frontend** | React 18 (Vite), Axios |
+| **Frontend** | HTML, CSS, JavaScript |
 | **Infrastructure** | Docker, Docker Compose, Nginx |
 
 ---
@@ -68,16 +68,13 @@ payment-gateway/
 │   │   ├── workers/         # Background Job Processors
 │   │   └── jobs/            # Job Definitions
 │   └── Dockerfile
-├── frontend/                # Merchant Dashboard (React)
-│   ├── src/
-│   │   ├── pages/           # Dashboard, Webhooks, Docs pages
-│   │   └── Checkout.jsx     # Checkout component
-│   └── Dockerfile
+├── frontend/                # Merchant Dashboard (HTML/CSS/JS)
+│   └── index.html           # Dashboard with webhook management
 ├── checkout-page/           # Hosted Checkout & SDK
-│   ├── public/checkout.js   # Embeddable JavaScript SDK
-│   ├── src/
-│   └── Dockerfile
-├── checkout-widget/         # SDK Development (Webpack)
+│   ├── index.html           # Customer payment form
+│   └── checkout.js          # Embeddable JavaScript SDK
+├── checkout-widget/         # SDK Development
+│   └── checkout.js          # SDK source
 └── docker-compose.yml
 ```
 
