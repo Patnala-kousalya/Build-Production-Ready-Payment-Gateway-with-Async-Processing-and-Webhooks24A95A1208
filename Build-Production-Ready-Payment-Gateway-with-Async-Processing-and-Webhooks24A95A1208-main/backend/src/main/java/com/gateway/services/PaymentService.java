@@ -21,7 +21,7 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final OrderRepository orderRepository;
     private final IdempotencyKeyRepository idempotencyKeyRepository;
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<Object, Object> redisTemplate;
     private final WebhookService webhookService;
 
     @Transactional
