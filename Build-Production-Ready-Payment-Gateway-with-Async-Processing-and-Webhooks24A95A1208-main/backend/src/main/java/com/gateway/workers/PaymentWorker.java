@@ -14,7 +14,7 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class PaymentWorker {
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<Object, Object> redisTemplate;
     private final PaymentService paymentService;
 
     @Value("${app.role:API}")

@@ -14,7 +14,7 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class RefundWorker {
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<Object, Object> redisTemplate;
     private final RefundService refundService;
 
     @Value("${app.role:API}")

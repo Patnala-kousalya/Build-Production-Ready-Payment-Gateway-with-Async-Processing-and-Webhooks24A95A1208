@@ -21,7 +21,7 @@ public class RefundService {
 
     private final RefundRepository refundRepository;
     private final PaymentRepository paymentRepository;
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<Object, Object> redisTemplate;
     private final WebhookService webhookService;
 
     @Transactional

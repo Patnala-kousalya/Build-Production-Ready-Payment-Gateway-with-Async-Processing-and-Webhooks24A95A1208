@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class WebhookWorker {
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<Object, Object> redisTemplate;
     private final WebhookService webhookService;
 
     @Value("${app.role:API}")

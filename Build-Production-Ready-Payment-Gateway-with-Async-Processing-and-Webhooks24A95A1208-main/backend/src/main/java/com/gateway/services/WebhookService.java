@@ -25,7 +25,7 @@ import java.util.Base64;
 public class WebhookService {
 
     private final WebhookLogRepository webhookLogRepository;
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<Object, Object> redisTemplate;
     private final RestTemplate restTemplate = new RestTemplate();
 
     public void sendWebhook(Merchant merchant, String event, Object payload) {
