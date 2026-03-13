@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Climate Debate Simulator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body {
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background: linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#1c1c1c);
+    background-size:400% 400%;
+    animation: gradientMove 10s ease infinite;
+    color:white;
+}
+
+@keyframes gradientMove {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container {
+    max-width:1100px;
+    margin:auto;
+    padding:25px;
+}
+
+.title {
+    text-align:center;
+    font-size:34px;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.controls {
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+input {
+    flex:1;
+    padding:12px;
+    border-radius:10px;
+    border:none;
+}
+
+button {
+    padding:12px 18px;
+    border:none;
+    border-radius:10px;
+    background:#ff7b00;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover {
+    transform:scale(1.05);
+    background:#ffa042;
+}
+
+.card {
+    background:rgba(255,255,255,.08);
+    backdrop-filter: blur(10px);
+    padding:18px;
+    border-radius:14px;
+    margin-bottom:15px;
+    animation: fadeIn .5s ease;
+}
+
+@keyframes fadeIn {
+    from{opacity:0; transform:translateY(15px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+.usa{border-left:6px solid #4ea1ff;}
+.eu{border-left:6px solid #2ecc71;}
+.china{border-left:6px solid #ff4d4d;}
+
+.badge {
+    padding:4px 10px;
+    border-radius:8px;
+    font-size:12px;
+    margin-left:10px;
+}
+
+.supportive{background:#2ecc71;}
+.opposed{background:#ff4d4d;}
+.neutral{background:#f1c40f; color:black;}
+
+.loader {
+    text-align:center;
+    font-size:20px;
+    margin-top:20px;
+}
+
+.toolbar {
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.timestamp{
+    font-size:12px;
+    opacity:.7;
+    text-align:right;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="title">🌍 AI Climate Policy Debate Simulator</div>
+
+<div class="controls">
+    <input id="topic" placeholder="Enter climate debate topic">
+    <input id="rounds" type="number" value="2" min="1" max="5">
+    <button onclick="startDebate()">Start</button>
+</div>
+
+<div class="toolbar">
+    <button onclick="copyTranscript()">Copy</button>
+    <button onclick="downloadTranscript()">Download</button>
+    <button onclick="clearDebate()">Clear</button>
+</div>
+
+<div id="debate-area"></div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
